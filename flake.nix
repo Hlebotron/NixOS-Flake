@@ -34,14 +34,14 @@
           ({ config, pkgs, inputs, ... }: { nixpkgs.overlays = [ nixpkgs-overlay ]; })
           ./configuration.nix
           ./modules/modules.nix
-          home-manager.nixosModules.home-manager {
-            home-manager = {
-              useGlobalPkgs = true; 
-              useUserPackages = true;
-              users.sasha = ./home/home.nix;
-            };
-          }
-          nixvim.homeManagerModules.nixvim {}
+          #home-manager.nixosModules.home-manager {
+          #  home-manager = {
+          #    useGlobalPkgs = true; 
+          #    useUserPackages = true;
+          #    users.sasha = import ./home/home.nix;
+          #  };
+          #}
+          #nixvim.homeManagerModules.nixvim {}
         ];
       };
       homeConfigurations.sasha = home-manager.lib.homeManagerConfiguration {
