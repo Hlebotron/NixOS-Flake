@@ -44,7 +44,7 @@
           nixvim.homeManagerModules.nixvim {}
         ];
       };
-      homeConfigurations.nixos-thinkpad = home-manager.lib.homeManagerConfiguration {
+      homeConfigurations.sasha = home-manager.lib.homeManagerConfiguration {
         pkgs = import nixpkgs {
           inherit system;
           config = {
@@ -52,8 +52,9 @@
           };
         };
         modules = [
-          ({ ... }: { home-manager.overlays = [ home-manager-overlay ]; })
+          #({ ... }: { home-manager.overlays = [ home-manager-overlay ]; })
           ./home/home.nix
+          nixvim.homeManagerModules.nixvim {}
         ];
       };
     };
