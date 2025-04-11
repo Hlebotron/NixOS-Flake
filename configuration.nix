@@ -3,42 +3,6 @@
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
 { config, lib, pkgs, inputs, ... }:
-
-let
-  userPkgs = with pkgs; [
-      kitty   
-      prismlauncher
-      steam
-      fastfetch
-      cargo
-      rustup
-      rustc
-      patchelf
-    #waybar
-      git
-      qutebrowser
-      nextcloud-client
-      xorg.xrandr
-      fuzzel
-      zip
-      unzip
-      eog
-      gcc
-      autoPatchelfHook	
-      gnome-terminal
-      postman
-      python3
-      papers
-      libreoffice
-      xorg.libXtst
-      #jre_minimal
-      jdk
-      blender
-  ];
-  unstableUserPkgs = with pkgs.unstable; [
-      waybar
-  ];
-in 
 {
   programs = {
 	hyprland.enable = true;
@@ -55,7 +19,6 @@ in
 
    users = {
    	users.sasha = {
-		packages = userPkgs ++ unstableUserPkgs;	
 		isNormalUser = true;
 		extraGroups = [ "wheel" "nixos" "networkmanager" ]; # Enable ‘sudo’ for the user.
 	};
@@ -105,9 +68,7 @@ in
   # services.xserver.xkb.options = "eurosign:e,caps:escape";
 
   # Enable CUPS to print documents.
-  services = {
-  	printing.enable = true;
-  };
+  services.printing.enable = true;
 
   # Enable sound.
   # hardware.pulseaudio.enable = true;
@@ -118,11 +79,7 @@ in
 		pulse.enable = true;
 	};
   };
-  nix = {
-      settings = {
-	  experimental-features = [ "nix-command" "flakes" ];
-      }; 
-  };
+  nix.settings.experimental-features = [ "nix-command" "flakes" "pipe-operators" ];
   documentation.man.generateCaches = true;
   # Enable touchpad support (enabled default in most desktopManager).
   # services.libinput.enable = true;

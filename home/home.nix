@@ -31,11 +31,42 @@
 	userEmail = "stabasov@gmail.com"; 
 	userName = "Hlebotron";
     };
+    nixvim.enable = true;
   };
   home = {
     packages = with pkgs; [
       home-manager
       wl-clipboard
+      zoxide
+      kitty   
+      prismlauncher
+      steam
+      fastfetch
+      #cargo
+      rustup
+      rustc
+      patchelf
+    #waybar
+      git
+      qutebrowser
+      nextcloud-client
+      xorg.xrandr
+      fuzzel
+      zip
+      unzip
+      eog
+      gcc
+      #autoPatchelfHook	
+      gnome-terminal
+      postman
+      python3
+      papers
+      libreoffice
+      xorg.libXtst
+      #jre_minimal
+      jdk
+      blender
+      waybar
     ];
     username = "sasha";
     homeDirectory = "/home/sasha";

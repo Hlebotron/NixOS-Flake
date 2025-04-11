@@ -1,8 +1,47 @@
 { pkgs, nixvim, ... }: {
     programs.nixvim = {
-      enable = true;
-      opts = {
+      plugins = {
+        lazy.enable = true;
+        treesitter = {
+            enable = true;
+            #build = ":TSUpdate";
+            #auto_install = true;
+            grammarPackages = with pkgs.vimPlugins.nvim-treesitter.builtGrammars; [
+                bash
+                c
+                diff
+                html
+                lua
+                luadoc
+                markdown
+                markdown_inline
+                query
+                vim
+                vimdoc
+                rust
+                typst
+                python
+                nix
+            ];
+        };
+        harpoon = {
+            enable = false;
+            enableTelescope = true;
+        };
+        telescope = {
+            enable = false;
+        };
 
+        #gitsigns = {
+        #  enable = true;
+        #  opts = {
+        #    #signs = {
+        #    #  add = 
+        #    #};
+        #  };
+        #};
+      };
+      opts = {
 	number = true;
 	relativenumber = true;
 	mouse = "a";
@@ -48,41 +87,13 @@
                 action = "<C-\\><C-n>";
             }
       ];
-      colorschemes.catppuccin.enable = true;
-      plugins = {
-        lazy.enable = true;
-        treesitter = {
-            enable = true;
-            #build = ":TSUpdate";
-            #auto_install = true;
-            grammarPackages = with pkgs.vimPlugins.nvim-treesitter.builtGrammars; [
-                bash
-                c
-                diff
-                html
-                lua
-                luadoc
-                markdown
-                markdown_inline
-                query
-                vim
-                vimdoc
-                rust
-                typst
-                python
-                nix
-            ];
-        };
-        harpoon.enable = true;
-
-        #gitsigns = {
-        #  enable = true;
-        #  opts = {
-        #    #signs = {
-        #    #  add = 
-        #    #};
-        #  };
-        #};
+      colorschemes = {
+        gruvbox.enable = false;
+        catppuccin.enable = true;
+      };
+      clipboard = {
+        providers.wl-copy.enable = true;
+        register = "unnamedplus";
       };
     };
 }
