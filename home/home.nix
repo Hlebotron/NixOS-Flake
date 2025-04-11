@@ -1,12 +1,50 @@
 { config, pkgs, nixvim, ... }:
 
-{
+let
+    packages = with pkgs; [
+      home-manager
+      wl-clipboard
+      zoxide
+      kitty   
+      prismlauncher
+      steam
+      fastfetch
+      #cargo
+      #rustup
+      #rustc
+      #patchelf
+      #waybar
+      git
+      qutebrowser
+      nextcloud-client
+      #xorg.xrandr
+      fuzzel
+      zip
+      unzip
+      eog
+      #gcc
+      #autoPatchelfHook	
+      gnome-terminal
+      postman
+      #python3
+      papers
+      libreoffice
+      xorg.libXtst
+      #jre_minimal
+      #jdk
+      #blender
+      waybar
+      sops
+    ];
+    packages-unstable = with pkgs.unstable; [
+        
+    ];
+in {
   imports = [
     #./scripts.nix
     ./nixvim.nix
   ];
   programs = {
-    #nixvim = { nixvim, ... }: { import ./nixvim.nix; };
     bash = {
       enable = true;
       shellAliases = {
@@ -18,11 +56,14 @@
         addtime = "ssh sasha@192.168.1.103 \"~/addtime.sh $1\"";
         flake = "nvim /etc/nixos/flake.nix";
         n = "nvim";
-        nrs = "sudo nixos-rebuild switch --flake /etc/nixos";
-        hms = "home-manager switch --flake /etc/nixos";
+        nrs = "nh os switch /etc/nixos";
+        hms = "nh home switch /etc/nixos";
         home = "nvim /etc/nixos/home/home.nix";
         nixos = "cd /etc/nixos";
+        c = "z";
       };
+      initExtra = "fastfetch";
+      #shellInit = "fastfetch";
       #interactiveShellInit = "fastfetch";
     };
     nh.enable = true;
@@ -32,42 +73,10 @@
 	userName = "Hlebotron";
     };
     nixvim.enable = true;
+    zoxide.enable = true;
   };
   home = {
-    packages = with pkgs; [
-      home-manager
-      wl-clipboard
-      zoxide
-      kitty   
-      prismlauncher
-      steam
-      fastfetch
-      #cargo
-      rustup
-      rustc
-      patchelf
-    #waybar
-      git
-      qutebrowser
-      nextcloud-client
-      xorg.xrandr
-      fuzzel
-      zip
-      unzip
-      eog
-      gcc
-      #autoPatchelfHook	
-      gnome-terminal
-      postman
-      python3
-      papers
-      libreoffice
-      xorg.libXtst
-      #jre_minimal
-      jdk
-      blender
-      waybar
-    ];
+    packages = packages ++ packages-unstable;
     username = "sasha";
     homeDirectory = "/home/sasha";
 
@@ -104,7 +113,7 @@
     #  /etc/profiles/per-user/sasha/etc/profile.d/hm-session-vars.sh
     #
     sessionVariables = {
-      # EDITOR = "emacs";
+      EDITOR = "nvim";
     };
     stateVersion = "24.05";  
   };

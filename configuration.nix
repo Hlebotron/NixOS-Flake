@@ -17,8 +17,8 @@
       ./hardware-configuration.nix
     ];
 
-   users = {
-   	users.sasha = {
+    users = {
+	users.sasha = {
 		isNormalUser = true;
 		extraGroups = [ "wheel" "nixos" "networkmanager" ]; # Enable ‘sudo’ for the user.
 	};
@@ -27,7 +27,17 @@
 			members = [ "sasha" ];
 		}; 
 	};
-   };
+    };
+    containers.nginx = {
+        autoStart = false;  
+        #privateNetwork = true;
+        config = { config, pkgs, lib, ... }: {
+            system.stateVersion = "24.11";
+            services.nginx = {
+                enable = true;
+            };
+        };
+    };
 
   hardware.bluetooth.enable = true;
   # Use the systemd-boot EFI boot loader.

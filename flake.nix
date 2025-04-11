@@ -50,6 +50,7 @@
           config = {
             allowUnfree = true;
           };
+          overlays = [ nixpkgs-overlay ];
         };
         modules = [
           #({ ... }: { home-manager.overlays = [ home-manager-overlay ]; })
