@@ -28,16 +28,16 @@
 		}; 
 	};
     };
-    containers.nginx = {
-        autoStart = false;  
-        #privateNetwork = true;
-        config = { config, pkgs, lib, ... }: {
-            system.stateVersion = "24.11";
-            services.nginx = {
-                enable = true;
-            };
-        };
-    };
+    #containers.nginx = {
+    #    autoStart = false;  
+    #    #privateNetwork = true;
+    #    config = { config, pkgs, lib, ... }: {
+    #        system.stateVersion = "24.11";
+    #        services.nginx = {
+    #            enable = true;
+    #        };
+    #    };
+    #};
 
   hardware.bluetooth.enable = true;
   # Use the systemd-boot EFI boot loader.

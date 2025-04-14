@@ -58,7 +58,7 @@ in {
         n = "nvim";
         nrs = "nh os switch /etc/nixos";
         hms = "nh home switch /etc/nixos";
-        home = "nvim /etc/nixos/home/home.nix";
+        home = "nvim /etc/nixos/home-manager/home.nix";
         nixos = "cd /etc/nixos";
         c = "z";
       };

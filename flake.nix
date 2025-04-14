@@ -12,9 +12,10 @@
       url = "github:nix-community/nixvim/nixos-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-darwin.url = "github:nix-darwin/nix-darwin/nix-darwin-24.11";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, nixvim, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, nixvim, nix-darwin, ... }@inputs:
     let
       system = "x86_64-linux";
       nixpkgs-overlay = final: prev: {
@@ -28,6 +29,7 @@
       home-manager-overlay = final: prev: {};
     in {
       nixosConfigurations.nixos-thinkpad = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
         specialArgs = { inherit inputs; };
         modules = [
           # Overlays-module makes "pkgs.unstable" available in configuration.nix
@@ -38,7 +40,7 @@
           #  home-manager = {
           #    useGlobalPkgs = true; 
           #    useUserPackages = true;
-          #    users.sasha = import ./home/home.nix;
+          #    users.sasha = import ./home-manager/home.nix;
           #  };
           #}
           #nixvim.homeManagerModules.nixvim {}
@@ -54,9 +56,22 @@
         };
         modules = [
           #({ ... }: { home-manager.overlays = [ home-manager-overlay ]; })
-          ./home/home.nix
+          ./home-manager/home.nix
           nixvim.homeManagerModules.nixvim {}
         ];
+      };
+      darwinConfiguration."MacBook" = nix-darwin.lib.darwinSystem {
+        system = "aarch64-darwin";
+        modules = [ 
+            ./darwin-configuration.nix 
+            #home-manager.darwinModules.home-manager {
+            #    home-manager {
+            #        users.sasha = import ./home-manager/home.nix;
+            #    };
+            #    users.users.sasha.home = "/Users/sasha";
+            #}
+        ];
+        specialArgs = { inherit inputs; };
       };
     };
   }
