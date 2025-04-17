@@ -1,11 +1,12 @@
-{ config, pkgs, nixvim, ... }:
+{ config, pkgs, nixvim, inputs, stylix, ... }:
 
 let
     packages = with pkgs; [
       home-manager
       wl-clipboard
       zoxide
-      kitty   
+      kitty
+      alacritty   
       prismlauncher
       steam
       fastfetch
@@ -74,6 +75,12 @@ in {
     };
     nixvim.enable = true;
     zoxide.enable = true;
+    #cavalier.enable = true;
+  };
+  stylix = {
+    autoEnable = true;
+    #base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-medium.yaml";
+    #image = ./wallpaper.png;
   };
   home = {
     packages = packages ++ packages-unstable;

@@ -12,9 +12,10 @@
       url = "github:nix-community/nixvim/nixos-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    stylix.url = "github:danth/stylix/release-24.11";
   };
 
-  outputs = { nixpkgs, home-manager, nixvim, ... }@inputs:
+  outputs = { nixpkgs, home-manager, nixvim, stylix, ... }@inputs:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
@@ -27,7 +28,8 @@
         # the path to your home.nix.
         modules = [ 
           ./home.nix 
-          nixvim.homeManagerModules.nixvim {}
+          nixvim.homeManagerModules.nixvim
+          stylix.homeManagerModules.stylix
         ];
 
         # Optionally use extraSpecialArgs

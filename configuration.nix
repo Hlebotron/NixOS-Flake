@@ -2,8 +2,7 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, lib, pkgs, inputs, ... }:
-{
+{ config, lib, pkgs, inputs, ... }: {
   programs = {
 	hyprland.enable = true;
 	hyprlock.enable = true;
@@ -17,28 +16,25 @@
       ./hardware-configuration.nix
     ];
 
-    users = {
-	users.sasha = {
-		isNormalUser = true;
-		extraGroups = [ "wheel" "nixos" "networkmanager" ]; # Enable ‘sudo’ for the user.
-	};
-   	extraGroups = { 
-		"nixos" = {
-			members = [ "sasha" ];
-		}; 
-	};
-    };
-    #containers.nginx = {
-    #    autoStart = false;  
-    #    #privateNetwork = true;
-    #    config = { config, pkgs, lib, ... }: {
-    #        system.stateVersion = "24.11";
-    #        services.nginx = {
-    #            enable = true;
-    #        };
-    #    };
-    #};
+  users = {
+      users.sasha = {
+              isNormalUser = true;
+              extraGroups = [ "wheel" "nixos" "networkmanager" ]; # Enable ‘sudo’ for the user.
+      };
+      extraGroups = { 
+              "nixos".members = [ "sasha" ]; 
+      };
+  };
 
+  stylix = {
+    enable = true;
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-frappe.yaml";
+    image = ./wallpaper.png;
+    cursor = {
+        name = "Bibata-Modern-Ice";
+        package = pkgs.bibata-cursors;
+    };
+  };
   hardware.bluetooth.enable = true;
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -92,7 +88,7 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" "pipe-operators" ];
   documentation.man.generateCaches = true;
   # Enable touchpad support (enabled default in most desktopManager).
-  # services.libinput.enable = true;
+  services.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
 
@@ -104,6 +100,7 @@
     neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
     home-manager
+    adwaita-icon-theme
   ];
   fonts.packages = with pkgs; [
     font-awesome
