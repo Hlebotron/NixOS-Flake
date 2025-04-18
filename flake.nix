@@ -15,7 +15,7 @@
     nix-darwin.url = "github:nix-darwin/nix-darwin/nix-darwin-24.11";
     stylix = {
         url = "github:danth/stylix/release-24.11";
-        #inputs.nixpkgs.follows = "nixpkgs";
+        inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
@@ -40,16 +40,19 @@
           ({ config, pkgs, inputs, ... }: { nixpkgs.overlays = [ nixpkgs-overlay ]; })
           ./configuration.nix
           ./modules/modules.nix
-          #home-manager.nixosModules.home-manager {
-          #  home-manager = {
-          #    useGlobalPkgs = true; 
-          #    useUserPackages = true;
-          #    users.sasha = import ./home-manager/home.nix;
-          #  };
-          #}
-          #nixvim.homeManagerModules.nixvim {}
+          home-manager.nixosModules.home-manager {
+            home-manager = {
+              useGlobalPkgs = true; 
+              useUserPackages = true;
+              extraSpecialArgs = { inherit inputs; };
+              users.sasha = import ./home-manager/home.nix;
+              sharedModules = [
+                  nixvim.homeManagerModules.nixvim
+                  #stylix.homeManagerModules.stylix
+              ];
+            };
+          }
           stylix.nixosModules.stylix
-          #stylix.homeManagerModules.stylix
         ];
       };
       homeConfigurations.sasha = home-manager.lib.homeManagerConfiguration {
@@ -67,7 +70,7 @@
           stylix.homeManagerModules.stylix
         ];
       };
-      darwinConfiguration."MacBook" = nix-darwin.lib.darwinSystem {
+      darwinConfiguration.MacBook = nix-darwin.lib.darwinSystem {
         system = "aarch64-darwin";
         modules = [ 
             ./darwin-configuration.nix 

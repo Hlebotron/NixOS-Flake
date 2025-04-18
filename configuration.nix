@@ -2,19 +2,20 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, lib, pkgs, inputs, ... }: {
-  programs = {
-	hyprland.enable = true;
-	hyprlock.enable = true;
-	ladybird.enable = true;
-	firefox.enable = true;
-	steam.enable = true;
-	nix-ld.enable = true;
-  };
+{ config, lib, pkgs, inputs, stylix, ... }: {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];
+  programs = {
+    #dconf.enable = true;
+    hyprland.enable = true;
+    hyprlock.enable = true;
+    #ladybird.enable = false;
+    firefox.enable = true;
+    steam.enable = true;
+    nix-ld.enable = true;
+  };
 
   users = {
       users.sasha = {
@@ -28,12 +29,17 @@
 
   stylix = {
     enable = true;
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-frappe.yaml";
-    image = ./wallpaper.png;
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-hard.yaml";
+    image = builtins.fetchurl {
+        url = "https://w.wallhaven.cc/full/2y/wallhaven-2y2wg6.png";
+        sha256 = "sha256:084qgbicqiqwprb9m6l5jwij26rv8r73h76vba523z6q9rz0snlw";
+    };
+    polarity = "dark";
     cursor = {
         name = "Bibata-Modern-Ice";
         package = pkgs.bibata-cursors;
     };
+    homeManagerIntegration.followSystem = true;
   };
   hardware.bluetooth.enable = true;
   # Use the systemd-boot EFI boot loader.
@@ -49,7 +55,7 @@
   };
 
   # Set your time zone.
-  # time.timeZone = "Europe/Amsterdam";
+  time.timeZone = "Europe/Budapest";
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";

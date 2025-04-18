@@ -45,6 +45,7 @@ in {
     #./scripts.nix
     ./nixvim.nix
   ];
+  stylix.autoEnable = true;
   programs = {
     bash = {
       enable = true;
@@ -75,13 +76,12 @@ in {
     };
     nixvim.enable = true;
     zoxide.enable = true;
-    #cavalier.enable = true;
   };
-  stylix = {
-    autoEnable = true;
-    #base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-medium.yaml";
-    #image = ./wallpaper.png;
-  };
+  #stylix = {
+  #  autoEnable = true;
+  #  #base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-medium.yaml";
+  #  #image = ./wallpaper.png;
+  #};
   home = {
     packages = packages ++ packages-unstable;
     username = "sasha";
