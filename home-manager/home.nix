@@ -2,6 +2,8 @@
 
 let
     packages = with pkgs; [
+      zeal
+      luakit
       home-manager
       wl-clipboard
       zoxide
@@ -45,8 +47,14 @@ in {
     #./scripts.nix
     ./nixvim.nix
   ];
-  stylix.autoEnable = true;
+  #stylix.autoEnable = true;
   programs = {
+    emacs = {
+      enable = true;
+      extraPackages = epkgs: with epkgs; [
+        evil
+      ];
+    };
     bash = {
       enable = true;
       shellAliases = {
@@ -77,11 +85,16 @@ in {
     nixvim.enable = true;
     zoxide.enable = true;
   };
-  #stylix = {
-  #  autoEnable = true;
-  #  #base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-medium.yaml";
-  #  #image = ./wallpaper.png;
-  #};
+  stylix = {
+    enable = true;
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-city-dark.yaml";
+    image = ./wallpaper.png;
+    cursor = {
+        name = "Bibata-Modern-Classic";
+        package = pkgs.bibata-cursors;
+        size = 20;
+    };
+  };
   home = {
     packages = packages ++ packages-unstable;
     username = "sasha";

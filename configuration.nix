@@ -29,17 +29,16 @@
 
   stylix = {
     enable = true;
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-hard.yaml";
-    image = builtins.fetchurl {
-        url = "https://w.wallhaven.cc/full/2y/wallhaven-2y2wg6.png";
-        sha256 = "sha256:084qgbicqiqwprb9m6l5jwij26rv8r73h76vba523z6q9rz0snlw";
-    };
+    #base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-hard.yaml";
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-city-dark.yaml";
+    image = ./wallpaper.png;
     polarity = "dark";
     cursor = {
-        name = "Bibata-Modern-Ice";
+        name = "Bibata-Modern-Classic";
         package = pkgs.bibata-cursors;
+        size = 20;
     };
-    homeManagerIntegration.followSystem = true;
+    #homeManagerIntegration.followSystem = true;
   };
   hardware.bluetooth.enable = true;
   # Use the systemd-boot EFI boot loader.
@@ -80,7 +79,6 @@
   # services.xserver.xkb.options = "eurosign:e,caps:escape";
 
   # Enable CUPS to print documents.
-  services.printing.enable = true;
 
   # Enable sound.
   # hardware.pulseaudio.enable = true;
@@ -90,9 +88,18 @@
 		enable = true;
 		pulse.enable = true;
 	};
+        printing = {
+          enable = true;
+          drivers = with pkgs; [ hplip ];
+        };
+        avahi.enable = true;
+        mysql = {
+          enable = true;
+          package = pkgs.mariadb;
+        };
   };
   nix.settings.experimental-features = [ "nix-command" "flakes" "pipe-operators" ];
-  documentation.man.generateCaches = true;
+  #documentation.man.generateCaches = true;
   # Enable touchpad support (enabled default in most desktopManager).
   services.libinput.enable = true;
 

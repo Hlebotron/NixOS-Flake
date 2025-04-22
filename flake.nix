@@ -40,18 +40,18 @@
           ({ config, pkgs, inputs, ... }: { nixpkgs.overlays = [ nixpkgs-overlay ]; })
           ./configuration.nix
           ./modules/modules.nix
-          home-manager.nixosModules.home-manager {
-            home-manager = {
-              useGlobalPkgs = true; 
-              useUserPackages = true;
-              extraSpecialArgs = { inherit inputs; };
-              users.sasha = import ./home-manager/home.nix;
-              sharedModules = [
-                  nixvim.homeManagerModules.nixvim
-                  #stylix.homeManagerModules.stylix
-              ];
-            };
-          }
+          #home-manager.nixosModules.home-manager {
+          #  home-manager = {
+          #    useGlobalPkgs = true; 
+          #    useUserPackages = true;
+          #    extraSpecialArgs = { inherit inputs; };
+          #    users.sasha = import ./home-manager/home.nix;
+          #    sharedModules = [
+          #        nixvim.homeManagerModules.nixvim
+          #        #stylix.homeManagerModules.stylix
+          #    ];
+          #  };
+          #}
           stylix.nixosModules.stylix
         ];
       };

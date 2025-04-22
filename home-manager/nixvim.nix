@@ -1,7 +1,7 @@
 { pkgs, nixvim, ... }: {
     programs.nixvim = {
       plugins = {
-        lazy.enable = true;
+        lazy.enable = false;
         treesitter = {
             enable = true;
             #build = ":TSUpdate";
@@ -23,24 +23,48 @@
                 python
                 nix
             ];
+            settings = {
+                highlight.enable = true;
+                indent.enable = true;
+                incremental_selection.enable = true;
+            };
         };
         harpoon = {
             enable = false;
             enableTelescope = true;
         };
-        telescope = {
-            enable = false;
+        telescope.enable = false;
+        lsp = {
+            enable = true;
+            servers = {
+                rust_analyzer = {
+                    enable = true;
+                    installCargo = true;
+                    installRustc = true;
+                    installRustfmt = true;
+                    autostart = true;
+                    filetypes = [
+                        "rs"
+                    ];
+                };
+            };
         };
-
-        #gitsigns = {
-        #  enable = true;
-        #  opts = {
-        #    #signs = {
-        #    #  add = 
-        #    #};
-        #  };
+        sleuth.enable = true;
+        gitsigns.enable = true;        
+        lint = {
+            enable = true;
+            customLinters = {
+                #rust_analyzer = {
+                #    cmd = "";
+                #};
+            };
+        };
+        #lazydev = {
+        #    enable = true;
+        #    autoLoad = true;
         #};
       };
+
       opts = {
 	number = true;
 	relativenumber = true;
@@ -48,7 +72,7 @@
 	showmode = false;
 	shiftwidth = 4;
 	softtabstop = 4;
-	expandtab = true;
+	expandtab = false;
 	breakindent = true;
 	undofile = true;
 	ignorecase = true;
