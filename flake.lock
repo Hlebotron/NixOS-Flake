@@ -67,6 +67,23 @@
         "type": "github"
       }
     },
+    "bepinex": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1,
+        "narHash": "sha256-lKMriUQQT9MV0aW47pqASCRTI7KlrTdYNmnrgcXa74Q=",
+        "path": "/nix/store/vpipvvqmnnq7vj7zgcd6iisj2lqabsdq-source/home-manager/bepinex",
+        "type": "path"
+      },
+      "original": {
+        "path": "/nix/store/vpipvvqmnnq7vj7zgcd6iisj2lqabsdq-source/home-manager/bepinex",
+        "type": "path"
+      }
+    },
     "devshell": {
       "inputs": {
         "nixpkgs": [
@@ -558,6 +575,7 @@
     },
     "root": {
       "inputs": {
+        "bepinex": "bepinex",
         "home-manager": "home-manager",
         "nix-darwin": "nix-darwin",
         "nixpkgs": "nixpkgs_2",

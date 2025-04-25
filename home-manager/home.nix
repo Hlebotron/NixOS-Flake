@@ -2,6 +2,20 @@
 
 let
     packages = with pkgs; [
+      gnumake	         
+      pkg-config
+      glib
+      gobject-introspection
+      pango
+      gdk-pixbuf
+      gtk4
+      adwaita-icon-theme
+      clang
+      cargo
+      rustc
+      uxplay
+      cmus
+      yt-dlp
       zeal
       luakit
       home-manager
@@ -26,7 +40,7 @@ let
       unzip
       eog
       #gcc
-      #autoPatchelfHook	
+      #autoPatchelfHook
       gnome-terminal
       postman
       #python3
@@ -42,6 +56,10 @@ let
     packages-unstable = with pkgs.unstable; [
         
     ];
+    custom-packages = [
+      (pkgs.callPackage ./bepinex/package.nix {})
+    #(pkgs.callPackage bepinex {})
+    ];
 in {
   imports = [
     #./scripts.nix
@@ -53,11 +71,15 @@ in {
       enable = true;
       extraPackages = epkgs: with epkgs; [
         evil
+        tree-sitter
+        multiple-cursors
+        exec-path-from-shell
       ];
     };
     bash = {
       enable = true;
       shellAliases = {
+        stats = "fastfetch";
         nconf = "nvim /etc/nixos/configuration.nix";
         rl = "source ~/.bashrc";
         pkgs = "man configuration.nix";
@@ -76,7 +98,18 @@ in {
       #shellInit = "fastfetch";
       #interactiveShellInit = "fastfetch";
     };
-    nh.enable = true;
+    ncmpcpp = {
+      enable = false;
+      mpdMusicDir = /home/sasha/Music;
+      settings = {
+        ncmpcpp_directory = "/home/sasha/.config/ncmpcpp";
+      };
+    };
+    nh = {
+      enable = true;
+      clean.extraArgs = "--keep-since 5d --keep 5";
+      flake = "/etc/nixos";
+    };
     git = {
     	enable = true;
 	userEmail = "stabasov@gmail.com"; 
@@ -95,8 +128,28 @@ in {
         size = 20;
     };
   };
+  services = {
+    emacs.enable = true;
+    mpd = {
+      enable = true;
+      musicDirectory = /home/sasha/Music;
+      dataDir = /home/sasha/.local/share/mpd;
+      extraConfig = ''
+        audio_output {
+          type "pipewire"
+          name "Wire of Pipe"
+        }
+        auto_update "yes"
+      '';
+      network = {
+        startWhenNeeded = true;
+        listenAddress = "any";
+      };
+      #playlistDirectory = /home/sasha/Music/Playlists;
+    };
+  };
   home = {
-    packages = packages ++ packages-unstable;
+    packages = packages ++ packages-unstable ++ custom-packages;
     username = "sasha";
     homeDirectory = "/home/sasha";
 
@@ -134,6 +187,9 @@ in {
     #
     sessionVariables = {
       EDITOR = "nvim";
+      #XDG_CONFIG_HOME = "/home/sasha/.config";
+      #XDG_MUSIC_DIR = "/home/sasha/Music";
+      #XDG_CACHE_HOME = "/home/sasha/.cache";
     };
     stateVersion = "24.05";  
   };

@@ -20,6 +20,22 @@
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
     in {
+      packages.${system}.bepinex = pkgs.mkDerivation {
+        name = "bepinex";
+        inherit system;
+        version = "5.4.23.3";
+        src = pkgs.fetchUrl {
+          url = "https://github.com/BepInEx/BepInEx/releases/download/v${version}/BepInEx_linux_x86_${version}.zip";
+          hash = ""; 
+        };
+        nativeBuildInputs = with pkgs; [
+          unzip
+          #autoPatchElfHook
+        ];
+        unpackPhase = ''
+          ${pkgs.unzip}/bin/unzip $src/BepInEx_linux_x86_5.4.23.3.zip 
+        '';
+      }
       homeConfigurations."sasha" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         extraSpecialArgs = { inherit inputs; };
