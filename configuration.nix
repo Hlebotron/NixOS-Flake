@@ -87,21 +87,14 @@
 	pipewire = {
 		enable = true;
 		pulse.enable = true;
-                alsa.enable = true;
-                jack.enable = true;
-                wireplumber.enable = true;
 	};
         printing = {
           enable = true;
           drivers = with pkgs; [ hplip ];
         };
-        avahi = {
-          enable = true;
-          openFirewall = true;
-          publish.enable = true;
-        };
+        avahi.enable = true;
         mysql = {
-          enable = false;
+          enable = true;
           package = pkgs.mariadb;
         };
   };
