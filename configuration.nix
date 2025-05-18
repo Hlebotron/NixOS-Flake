@@ -45,7 +45,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "nixos-thinkpad"; # Define your hostname.
+  networking.hostName = "nixos-probook"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   # networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
@@ -97,6 +97,16 @@
           enable = true;
           package = pkgs.mariadb;
         };
+        mpd = {
+          enable = true;
+          musicDirectory = "/home/sasha/Music";
+          extraConfig = ''
+            audio_output {
+              type "pulse"
+              name "My PulseAudio" # this can be whatever you want
+            }
+          '';
+        };
   };
   nix.settings.experimental-features = [ "nix-command" "flakes" "pipe-operators" ];
   #documentation.man.generateCaches = true;
@@ -133,7 +143,7 @@
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
+  services.openssh.enable = false;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

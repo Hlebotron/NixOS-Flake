@@ -32,28 +32,30 @@
       };
       home-manager-overlay = final: prev: {};
     in {
-      nixosConfigurations.nixos-thinkpad = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = { inherit inputs; };
-        modules = [
-          # Overlays-module makes "pkgs.unstable" available in configuration.nix
-          ({ config, pkgs, inputs, ... }: { nixpkgs.overlays = [ nixpkgs-overlay ]; })
-          ./configuration.nix
-          ./modules/modules.nix
-          #home-manager.nixosModules.home-manager {
-          #  home-manager = {
-          #    useGlobalPkgs = true; 
-          #    useUserPackages = true;
-          #    extraSpecialArgs = { inherit inputs; };
-          #    users.sasha = import ./home-manager/home.nix;
-          #    sharedModules = [
-          #        nixvim.homeManagerModules.nixvim
-          #        #stylix.homeManagerModules.stylix
-          #    ];
-          #  };
-          #}
-          stylix.nixosModules.stylix
-        ];
+      nixosConfigurations = {
+        nixos-probook = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = { inherit inputs; };
+          modules = [
+            # Overlays-module makes "pkgs.unstable" available in configuration.nix
+            ({ config, pkgs, inputs, ... }: { nixpkgs.overlays = [ nixpkgs-overlay ]; })
+            ./configuration.nix
+            ./modules/modules.nix
+            #home-manager.nixosModules.home-manager {
+            #  home-manager = {
+            #    useGlobalPkgs = true; 
+            #    useUserPackages = true;
+            #    extraSpecialArgs = { inherit inputs; };
+            #    users.sasha = import ./home-manager/home.nix;
+            #    sharedModules = [
+            #        nixvim.homeManagerModules.nixvim
+            #        #stylix.homeManagerModules.stylix
+            #    ];
+            #  };
+            #}
+            stylix.nixosModules.stylix
+          ];
+        };
       };
       homeConfigurations.sasha = home-manager.lib.homeManagerConfiguration {
         pkgs = import nixpkgs {

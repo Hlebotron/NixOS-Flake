@@ -2,6 +2,14 @@
 
 let
     packages = with pkgs; [
+      adwaita-icon-theme
+      brightnessctl
+      gimp
+      gnome-characters
+      hyprpaper
+      mpc
+      yt-dlp
+      wlrctl
       zeal
       luakit
       home-manager
@@ -53,6 +61,7 @@ in {
       enable = true;
       extraPackages = epkgs: with epkgs; [
         evil
+        multiple-cursors
       ];
     };
     bash = {
