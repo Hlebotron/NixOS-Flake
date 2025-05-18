@@ -17,9 +17,13 @@
         url = "github:danth/stylix/release-24.11";
         inputs.nixpkgs.follows = "nixpkgs";
     };
+    bepinex = {
+      url = "./home-manager/bepinex/";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, nixvim, nix-darwin, stylix, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, nixvim, nix-darwin, stylix, bepinex, ... }@inputs:
     let
       system = "x86_64-linux";
       nixpkgs-overlay = final: prev: {
@@ -63,11 +67,13 @@
           };
           overlays = [ nixpkgs-overlay ];
         };
+        extraSpecialArgs = { inherit inputs; };
         modules = [
           #({ ... }: { home-manager.overlays = [ home-manager-overlay ]; })
           ./home-manager/home.nix
           nixvim.homeManagerModules.nixvim
           stylix.homeManagerModules.stylix
+          #bepinex.packages.x86_64-linux.default
         ];
       };
       darwinConfiguration.MacBook = nix-darwin.lib.darwinSystem {
