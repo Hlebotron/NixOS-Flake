@@ -56,6 +56,17 @@
             stylix.nixosModules.stylix
           ];
         };
+        maxim-dell = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = { inherit inputs; };
+          modules = [
+            # Overlays-module makes "pkgs.unstable" available in configuration.nix
+            ({ config, pkgs, inputs, ... }: { nixpkgs.overlays = [ nixpkgs-overlay ]; })
+            ./hosts/maxim-dell/configuration.nix
+            ./nixos-modules/modules.nix
+            stylix.nixosModules.stylix
+          ];
+        };
       };
       homeConfigurations.sasha = home-manager.lib.homeManagerConfiguration {
         pkgs = import nixpkgs {
@@ -75,7 +86,7 @@
       darwinConfiguration.MacBook = nix-darwin.lib.darwinSystem {
         system = "aarch64-darwin";
         modules = [ 
-            ./darwin-configuration.nix 
+            ./hosts/darwin/darwin-configuration.nix 
             #home-manager.darwinModules.home-manager {
             #    home-manager {
             #        users.sasha = import ./home-manager/home.nix;

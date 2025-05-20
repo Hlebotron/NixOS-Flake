@@ -6,6 +6,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ../../nixos-modules/modules.nix
     ];
   programs = {
     #dconf.enable = true;
@@ -20,7 +21,7 @@
   users = {
       users.sasha = {
               isNormalUser = true;
-              extraGroups = [ "wheel" "nixos" "networkmanager" ]; # Enable ‘sudo’ for the user.
+              extraGroups = [ "wheel" "nixos" "networkmanager" "mpd" ]; # Enable ‘sudo’ for the user.
       };
       extraGroups = { 
               "nixos".members = [ "sasha" ]; 
@@ -42,15 +43,19 @@
   };
   hardware.bluetooth.enable = true;
   # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader = {
+    systemd-boot.enable = true;
+    efi.canTouchEfiVariables = true;
+  };
 
-  networking.hostName = "nixos-probook"; # Define your hostname.
+  networking = {
+    hostName = "nixos-probook"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   # networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
-  networking.networkmanager = {
-	enable = true;
+    networkmanager = {
+          enable = true;
+    };
   };
 
   # Set your time zone.
@@ -94,18 +99,8 @@
         };
         avahi.enable = true;
         mysql = {
-          enable = true;
+          enable = false;
           package = pkgs.mariadb;
-        };
-        mpd = {
-          enable = true;
-          musicDirectory = "/home/sasha/Music";
-          extraConfig = ''
-            audio_output {
-              type "pulse"
-              name "My PulseAudio" # this can be whatever you want
-            }
-          '';
         };
   };
   nix.settings.experimental-features = [ "nix-command" "flakes" "pipe-operators" ];
@@ -119,12 +114,15 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    wget
-    home-manager
-    adwaita-icon-theme
-  ];
+  environment = {
+    systemPackages = with pkgs; [
+      neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+      nano
+      wget
+      home-manager
+      adwaita-icon-theme
+    ];
+  };
   fonts.packages = with pkgs; [
     font-awesome
     iosevka
