@@ -80,6 +80,7 @@ in {
         home = "nvim /etc/nixos/home-manager/home.nix";
         nixos = "cd /etc/nixos";
         c = "z";
+        dev = "nix develop";
       };
       initExtra = "fastfetch";
       #shellInit = "fastfetch";

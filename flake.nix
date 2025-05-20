@@ -39,8 +39,8 @@
           modules = [
             # Overlays-module makes "pkgs.unstable" available in configuration.nix
             ({ config, pkgs, inputs, ... }: { nixpkgs.overlays = [ nixpkgs-overlay ]; })
-            ./configuration.nix
-            ./modules/modules.nix
+            ./hosts/nixos-probook/configuration.nix
+            ./nixos-modules/modules.nix
             #home-manager.nixosModules.home-manager {
             #  home-manager = {
             #    useGlobalPkgs = true; 
