@@ -67,6 +67,17 @@
             stylix.nixosModules.stylix
           ];
         };
+        nixos-pc = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = { inherit inputs; };
+          modules = [
+            # Overlays-module makes "pkgs.unstable" available in configuration.nix
+            ({ config, pkgs, inputs, ... }: { nixpkgs.overlays = [ nixpkgs-overlay ]; })
+            ./hosts/nixos-pc/configuration.nix
+            ./nixos-modules/modules.nix
+            stylix.nixosModules.stylix
+          ];
+        };
       };
       homeConfigurations.sasha = home-manager.lib.homeManagerConfiguration {
         pkgs = import nixpkgs {

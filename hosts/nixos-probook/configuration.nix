@@ -90,8 +90,9 @@
   # OR
   services = {
 	pipewire = {
-		enable = true;
-		pulse.enable = true;
+          enable = true;
+          #pulse.enable = true;
+          wireplumber.enable = true;
 	};
         printing = {
           enable = true;
@@ -99,7 +100,7 @@
         };
         avahi.enable = true;
         mysql = {
-          enable = false;
+          enable = true;
           package = pkgs.mariadb;
         };
   };
