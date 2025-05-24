@@ -33,19 +33,19 @@
       };
   };
 
-  #stylix = {
-  #  enable = true;
-  #  #base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-hard.yaml";
-  #  base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-city-dark.yaml";
-  #  image = ./wallpaper.png;
-  #  polarity = "dark";
-  #  cursor = {
-  #      name = "Bibata-Modern-Classic";
-  #      package = pkgs.bibata-cursors;
-  #      size = 20;
-  #  };
-  #  #homeManagerIntegration.followSystem = true;
-  #};
+  stylix = {
+    enable = true;
+    #base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-hard.yaml";
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-city-dark.yaml";
+    image = ./wallpaper.png;
+    polarity = "dark";
+    cursor = {
+        name = "Bibata-Modern-Classic";
+        package = pkgs.bibata-cursors;
+        size = 20;
+    };
+    #homeManagerIntegration.followSystem = true;
+  };
   hardware.bluetooth.enable = true;
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;

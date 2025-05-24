@@ -289,7 +289,7 @@
 				echo 0 | tee $ticksUsedFile
 			fi
 
-			if [[ $(users) == *"$user"* ||  ]]; then
+			if [[ $(users) == *"$user"* ]]; then
 				id=$(pgrep -o -u $user)
 				ticksLeft=$(($ticksLeft - 1))
 
