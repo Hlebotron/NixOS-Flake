@@ -237,12 +237,14 @@
 	script = ''
 		set -x
 		rootDir=/opt/limit
+
 		maxMinsFile="$rootDir/maxMins"
 		dateFile="$rootDir/date"
 		ticksLeftFile="$rootDir/ticksLeft"
 		tickLengthFile="$rootDir/tickLengthSecs"
 		userFile="$rootDir/user"
 		ticksUsedFile="$rootDir/ticksUsed"
+
 		maxMins=15
 		user=maxim
 		tickLength=10
@@ -271,6 +273,9 @@
 		fi
 		if [[ -z $(cat $ticksUsedFile) ]]; then
 			echo 0 | tee $ticksUsedFile
+		fi
+		if [[ -z $(cat $dateFile) ]]; then
+			echo $(date -I) | tee $dateFile
 		fi
 
 		currentDay1=$(cat $dateFile)

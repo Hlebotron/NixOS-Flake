@@ -40,7 +40,6 @@
             # Overlays-module makes "pkgs.unstable" available in configuration.nix
             ({ config, pkgs, inputs, ... }: { nixpkgs.overlays = [ nixpkgs-overlay ]; })
             ./hosts/nixos-probook/configuration.nix
-            ./nixos-modules/modules.nix
             #home-manager.nixosModules.home-manager {
             #  home-manager = {
             #    useGlobalPkgs = true; 
@@ -63,7 +62,6 @@
             # Overlays-module makes "pkgs.unstable" available in configuration.nix
             ({ config, pkgs, inputs, ... }: { nixpkgs.overlays = [ nixpkgs-overlay ]; })
             ./hosts/maxim-dell/configuration.nix
-            ./nixos-modules/modules.nix
             stylix.nixosModules.stylix
           ];
         };
@@ -74,25 +72,9 @@
             # Overlays-module makes "pkgs.unstable" available in configuration.nix
             ({ config, pkgs, inputs, ... }: { nixpkgs.overlays = [ nixpkgs-overlay ]; })
             ./hosts/nixos-pc/configuration.nix
-            ./nixos-modules/modules.nix
             stylix.nixosModules.stylix
           ];
         };
-      };
-      homeConfigurations.sasha = home-manager.lib.homeManagerConfiguration {
-        pkgs = import nixpkgs {
-          inherit system;
-          config = {
-            allowUnfree = true;
-          };
-          overlays = [ nixpkgs-overlay ];
-        };
-        modules = [
-          #({ ... }: { home-manager.overlays = [ home-manager-overlay ]; })
-          ./home-manager/home.nix
-          nixvim.homeManagerModules.nixvim
-          stylix.homeManagerModules.stylix
-        ];
       };
       darwinConfiguration.MacBook = nix-darwin.lib.darwinSystem {
         system = "aarch64-darwin";
