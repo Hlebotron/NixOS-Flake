@@ -6,7 +6,6 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ../../nixos-modules/modules.nix
     ];
   programs = {
     #dconf.enable = true;
@@ -19,13 +18,13 @@
   };
 
   users = {
-      users.sasha = {
-              isNormalUser = true;
-              extraGroups = [ "wheel" "nixos" "networkmanager" "mpd" ]; # Enable ‘sudo’ for the user.
-      };
-      extraGroups = { 
-              "nixos".members = [ "sasha" ]; 
-      };
+    users.sasha = {
+      isNormalUser = true;
+      extraGroups = [ "wheel" "nixos" "networkmanager" "mpd" ]; # Enable ‘sudo’ for the user.
+    };
+    extraGroups = { 
+      "nixos".members = [ "sasha" ]; 
+    };
   };
 
   stylix = {
@@ -35,9 +34,9 @@
     image = ./wallpaper.png;
     polarity = "dark";
     cursor = {
-        name = "Bibata-Modern-Classic";
-        package = pkgs.bibata-cursors;
-        size = 20;
+      name = "Bibata-Modern-Classic";
+      package = pkgs.bibata-cursors;
+      size = 20;
     };
     #homeManagerIntegration.followSystem = true;
   };
@@ -50,11 +49,11 @@
 
   networking = {
     hostName = "nixos-probook"; # Define your hostname.
-  # Pick only one of the below networking options.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  # networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+    # Pick only one of the below networking options.
+    # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+    # networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
     networkmanager = {
-          enable = true;
+      enable = true;
     };
   };
 
@@ -77,7 +76,7 @@
   # services.xserver.enable = true;
 
 
-  
+
 
   # Configure keymap in X11
   # services.xserver.xkb.layout = "us";
@@ -89,20 +88,20 @@
   # hardware.pulseaudio.enable = true;
   # OR
   services = {
-	pipewire = {
-          enable = true;
-          #pulse.enable = true;
-          wireplumber.enable = true;
-	};
-        printing = {
-          enable = true;
-          drivers = with pkgs; [ hplip ];
-        };
-        avahi.enable = true;
-        mysql = {
-          enable = true;
-          package = pkgs.mariadb;
-        };
+    pipewire = {
+      enable = true;
+      #pulse.enable = true;
+      wireplumber.enable = true;
+    };
+    printing = {
+      enable = true;
+      drivers = with pkgs; [ hplip ];
+    };
+    avahi.enable = true;
+    mysql = {
+      enable = true;
+      package = pkgs.mariadb;
+    };
   };
   nix.settings.experimental-features = [ "nix-command" "flakes" "pipe-operators" ];
   #documentation.man.generateCaches = true;
@@ -127,6 +126,7 @@
   fonts.packages = with pkgs; [
     font-awesome
     iosevka
+    ia-writer-duospace
   ];
 
   nixpkgs.config.allowUnfree = true;
