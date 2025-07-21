@@ -111,7 +111,7 @@
   hardware = {
 		nvidia = {
 			package = config.boot.kernelPackages.nvidiaPackages.stable;
-			open = true;
+			open = false;
 		};
 		nvidia-container-toolkit.enable = true;
 		graphics.enable = true;
@@ -167,7 +167,7 @@
 			videoDrivers = [ "nvidia" ];
 		};
 		displayManager.sessionPackages = with pkgs; [ hyprland ];
-		pulseaudio.enable = true;	
+		pulseaudio.enable = false;	
 		printing.enable = true;
 		pipewire = {
 			enable = true;
@@ -196,13 +196,15 @@
 		};
 	};
 	systemd.services.limit = {
-		serviceConfig = {};
+		serviceConfig = {
+      ExecStart = "${pkgs.python3}/bin/python /etc/nixos/modules/limit.py";
+    };
 		wantedBy = [ "multi-user.target" ];
 		path = with pkgs; [
 			procps	
 			#util-linux
 		];
-		script = builtins.readFile ../../modules/limit.sh;
+		# script = builtins.readFile ../../modules/limit.sh;
 	};
 
 	# Enable the GNOME Desktop Environment.
