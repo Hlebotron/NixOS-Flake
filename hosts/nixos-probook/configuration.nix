@@ -11,16 +11,23 @@
     #dconf.enable = true;
     hyprland.enable = true;
     hyprlock.enable = true;
+    niri.enable = true;
     #ladybird.enable = false;
     firefox.enable = true;
-    steam.enable = true;
+    # steam = {
+    #  enable = true;
+      # extraPackages = [
+      #   libgkt-x11
+      # ];
+    # };
     nix-ld.enable = true;
+    xwayland.enable = true;
   };
 
   users = {
     users.sasha = {
       isNormalUser = true;
-      extraGroups = [ "wheel" "nixos" "networkmanager" "mpd" ]; # Enable ‘sudo’ for the user.
+      extraGroups = [ "wheel" "nixos" "networkmanager" "mpd" "dialout" ]; # Enable ‘sudo’ for the user.
     };
     extraGroups = { 
       "nixos".members = [ "sasha" ]; 
@@ -55,6 +62,10 @@
     networkmanager = {
       enable = true;
     };
+    firewall = {
+      allowedTCPPorts = [ 25565 ];
+      allowedUDPPorts = [ 25565 ];
+    };
   };
 
   # Set your time zone.
@@ -73,7 +84,7 @@
   # };
 
   # Enable the X11 windowing system.
-  # services.xserver.enable = true;
+  services.xserver.enable = false;
 
 
 
@@ -103,6 +114,17 @@
       package = pkgs.mariadb;
     };
   };
+  xdg = {
+    portal = {
+      enable = true;
+      xdgOpenUsePortal = true;
+      extraPortals = with pkgs; [
+        xdg-desktop-portal-gnome
+        xdg-desktop-portal-gtk        
+      ];
+      wlr.enable = true;
+    };
+  };
   nix.settings.experimental-features = [ "nix-command" "flakes" "pipe-operators" ];
   #documentation.man.generateCaches = true;
   # Enable touchpad support (enabled default in most desktopManager).
@@ -116,7 +138,8 @@
   # $ nix search wget
   environment = {
     systemPackages = with pkgs; [
-      neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+      neovim
+      emacs
       nano
       wget
       home-manager
