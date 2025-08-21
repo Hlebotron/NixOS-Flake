@@ -130,6 +130,18 @@
 		#proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 	};
 
+  xdg = {
+    portal = {
+      enable = true;
+      xdgOpenUsePortal = true;
+      extraPortals = with pkgs; [
+        xdg-desktop-portal-gnome
+        xdg-desktop-portal-gtk        
+      ];
+      wlr.enable = true;
+    };
+  };
+
 	# Enable networking
 	networking.networkmanager.enable = true;
 
@@ -197,7 +209,7 @@
 	};
 	systemd.services.limit = {
 		serviceConfig = {
-      ExecStart = "${pkgs.python3}/bin/python /etc/nixos/modules/limit.py";
+      ExecStart = "${pkgs.python3}/bin/python -u /etc/nixos/modules/limit.py";
     };
 		wantedBy = [ "multi-user.target" ];
 		path = with pkgs; [
