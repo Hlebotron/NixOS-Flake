@@ -43,7 +43,8 @@
 
 	# Install firefox.
 	programs = {
-		hyprland.enable = true;
+		# hyprland.enable = true;
+    niri.enable = true;
 		steam.enable = true;
 		firefox.enable = true;
 		nix-ld.enable = true;
@@ -178,7 +179,7 @@
 			};
 			videoDrivers = [ "nvidia" ];
 		};
-		displayManager.sessionPackages = with pkgs; [ hyprland ];
+		displayManager.sessionPackages = with pkgs; [ niri ];
 		pulseaudio.enable = false;	
 		printing.enable = true;
 		pipewire = {
