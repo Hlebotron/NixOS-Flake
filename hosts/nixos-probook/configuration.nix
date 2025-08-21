@@ -14,12 +14,12 @@
     niri.enable = true;
     #ladybird.enable = false;
     firefox.enable = true;
-    # steam = {
-    #  enable = true;
-      # extraPackages = [
-      #   libgkt-x11
-      # ];
-    # };
+    steam = {
+      enable = true;
+     # extraPackages = [
+     #   libgkt-x11
+     # ];
+    };
     nix-ld.enable = true;
     xwayland.enable = true;
   };
@@ -121,12 +121,15 @@
       extraPortals = with pkgs; [
         xdg-desktop-portal-gnome
         xdg-desktop-portal-gtk        
+        xdg-desktop-portal
       ];
       wlr.enable = true;
     };
   };
+  virtualisation.libvirtd.enable = true;
+  
   nix.settings.experimental-features = [ "nix-command" "flakes" "pipe-operators" ];
-  #documentation.man.generateCaches = true;
+  documentation.man.generateCaches = true;
   # Enable touchpad support (enabled default in most desktopManager).
   services.libinput.enable = true;
 
