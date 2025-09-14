@@ -12,6 +12,7 @@
     hyprland.enable = true;
     hyprlock.enable = true;
     niri.enable = true;
+    
     #ladybird.enable = false;
     firefox.enable = true;
     steam = {
@@ -84,11 +85,6 @@
   # };
 
   # Enable the X11 windowing system.
-  services.xserver.enable = false;
-
-
-
-
   # Configure keymap in X11
   # services.xserver.xkb.layout = "us";
   # services.xserver.xkb.options = "eurosign:e,caps:escape";
@@ -99,6 +95,10 @@
   # hardware.pulseaudio.enable = true;
   # OR
   services = {
+    xserver = {
+      desktopManager.gnome.enable = true;
+      displayManager.gdm.enable = true;
+    };
     pipewire = {
       enable = true;
       #pulse.enable = true;
