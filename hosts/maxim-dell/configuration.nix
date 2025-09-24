@@ -9,7 +9,7 @@
     ];
   programs = {
     #dconf.enable = true;
-    hyprland.enable = true;
+    niri.enable = true;
     hyprlock.enable = true;
     #ladybird.enable = false;
     firefox.enable = true;
