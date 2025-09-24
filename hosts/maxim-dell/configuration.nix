@@ -23,12 +23,16 @@
         isNormalUser = true;
         extraGroups = [ "wheel" "nixos" "networkmanager" ]; # Enable ‘sudo’ for the user.
       };
+      deema = {
+        isNormalUser = true;
+        extraGroups = [ "wheel" "nixos" "networkmanager" ]; # Enable ‘sudo’ for the user.
+      };
       maxim = {
         isNormalUser = true;
         extraGroups = [ "networkmanager" ];
       };
     };
-    extraGroups."nixos".members = [ "sasha" ]; 
+    extraGroups."nixos".members = [ "sasha" "deema" ]; 
   };
 
   stylix = {
@@ -81,15 +85,27 @@
   # Enable sound.
   # hardware.pulseaudio.enable = true;
   # OR
-  systemd.services.limit = {
-    serviceConfig = {};
-    wantedBy = [ "multi-user.target" ];
-    path = with pkgs; [
-      procps	
-      #util-linux
-    ];
-    script = builtins.readFile ../../modules/limit.sh;
-  };
+#  systemd.services.limit = {
+#    serviceConfig = {};
+#    wantedBy = [ "multi-user.target" ];
+#    path = with pkgs; [
+#      procps	
+#      #util-linux
+  #   ];
+  #   script = builtins.readFile ../../modules/limit.sh;
+  # };
+
+    systemd.services.limit = {
+	serviceConfig = {
+    	    ExecStart = "${pkgs.python3}/bin/python -u /etc/nixos/modules/limit.py";
+        };
+	wantedBy = [ "multi-user.target" ];
+	path = with pkgs; [
+	    procps	
+	    #util-linux
+	];
+    };
+
   services = {
     pipewire = {
       enable = true;
