@@ -26,6 +26,14 @@
         { nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux"; }
       ];
     };
+
+    vm = inputs.nixpkgs.lib.nixosSystem {
+      modules = [
+        self.modules.nixos.vm-conf
+        inputs.stylix.nixosModules.stylix
+        { nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux"; }
+      ];
+    };
     
   };
 }
