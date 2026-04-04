@@ -13,11 +13,15 @@
     };
     
     fileSystems."/" = {
-      device = "/dev/disk/by-uuid/0dfae9f9-dc0f-4466-befd-b21b6ce81140";
+      device = "/dev/disk/by-label/nixroot";
       fsType = "ext4";
     };
     
-    swapDevices = [];
+    swapDevices = [
+      {
+        device = "/dev/disk/by-label/swap";
+      }
+    ];
 
     nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   };
