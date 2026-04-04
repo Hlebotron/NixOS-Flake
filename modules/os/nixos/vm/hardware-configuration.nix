@@ -12,7 +12,7 @@
       extraModulePackages = [];
     };
     
-    filesystems."/" = {
+    fileSystems."/" = {
       device = "/dev/disk/by-uuid/0dfae9f9-dc0f-4466-befd-b21b6ce81140";
       fsType = "ext4";
     };
