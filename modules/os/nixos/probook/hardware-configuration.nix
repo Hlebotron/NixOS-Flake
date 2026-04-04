@@ -14,6 +14,8 @@
     boot.kernelModules = [ "kvm-intel" ];
     boot.extraModulePackages = [ ];
 
+    # Plus 8MiB unformatted grub partition
+    
     fileSystems."/" =
       { device = "/dev/disk/by-label/NIXROOT";
         fsType = "ext4";

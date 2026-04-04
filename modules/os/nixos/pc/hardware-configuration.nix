@@ -15,18 +15,24 @@
     boot.kernelModules = [ "kvm-amd" ];
     boot.extraModulePackages = [ ];
 
+    # Plus 8MiB unformatted grub partition
+    
     fileSystems."/" =
-      { device = "/dev/disk/by-uuid/e53fe9cb-094c-4161-8816-f876eb37cc0f";
+      { device = "/dev/disk/by-label/NIXROOT";
         fsType = "ext4";
       };
 
     fileSystems."/boot" =
-      { device = "/dev/disk/by-uuid/8925-74CA";
+      { device = "/dev/disk/by-label/NIXBOOT";
         fsType = "vfat";
         options = [ "fmask=0077" "dmask=0077" ];
       };
 
-    swapDevices = [ ];
+    swapDevices = [
+      {
+        device = "/dev/disk/by-label/NIXSWAP";
+      }
+    ];
 
     # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
     # (the default) this is the recommended approach. When using systemd-networkd it's
