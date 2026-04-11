@@ -118,7 +118,8 @@
                 hideUnoccupied = true;
                 id = "Workspace";
                 labelMode = "none";
-                showApplications = false;
+                showApplications = true;
+                showApplicationsHover = true;
                 showLabelsOnlyWhenOccupied = true;
               }
 
@@ -127,7 +128,7 @@
               }
               {
                 deviceNativePath = "";
-                displayMode = "alwaysShow";
+                displayMode = "icon-always";
                 hideIfNotDetected = true;
                 id = "Battery";
                 showNoctaliaPerformance = true;

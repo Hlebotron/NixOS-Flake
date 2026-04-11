@@ -28,12 +28,11 @@
         musicDirectory = /home/sasha/Music;
         network.listenAddress = "/home/sasha/.mpd/socket";
       };
-      # mpd-mpris = {
-      #   enable = true;
-      #   instances.default = {
-          
-      #   };
-      # };
+      mpd-mpris = {
+        enable = true;
+        mpd.host = "localhost";
+      };
+      mpris-proxy.enable = true;
       mako.enable = true;
     };
   };

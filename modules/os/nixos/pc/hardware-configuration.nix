@@ -15,8 +15,6 @@
     boot.kernelModules = [ "kvm-amd" ];
     boot.extraModulePackages = [ ];
 
-    # Plus 8MiB unformatted grub partition
-    
     fileSystems."/" =
       { device = "/dev/disk/by-label/NIXROOT";
         fsType = "ext4";

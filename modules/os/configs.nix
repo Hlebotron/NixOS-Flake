@@ -7,6 +7,7 @@
       modules = [
         self.modules.nixos.probook-conf
         inputs.stylix.nixosModules.stylix
+        inputs.disko.nixosModules.disko
         { nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux"; }
       ];
     };
@@ -15,6 +16,7 @@
       modules = [
         self.modules.nixos.pc-conf
         inputs.stylix.nixosModules.stylix
+        inputs.disko.nixosModules.disko
         { nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux"; }
       ];
     };
@@ -23,6 +25,7 @@
       modules = [
         self.modules.nixos.dell-conf
         inputs.stylix.nixosModules.stylix
+        inputs.disko.nixosModules.disko
         { nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux"; }
       ];
     };
@@ -31,6 +34,7 @@
       modules = [
         self.modules.nixos.vm-conf
         inputs.stylix.nixosModules.stylix
+        inputs.disko.nixosModules.disko
         { nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux"; }
       ];
     };

@@ -36,6 +36,7 @@
         fastfetch
         zeal
         gnome-boxes
+        edk2
       ];
     };
     office = { pkgs, ... }: {
