@@ -9,37 +9,39 @@
 	  imports =
 		  with inputs.self.modules.nixos; [ # Include the results of the hardware scan.
 			  pc-hw
+        users-public
+        nvidia
 		  ];
 
-	  users = {
-		  mutableUsers = true;
-		  groups.nixos.members = [ "sasha" "deema" ];
-		  users = { 
-			  sasha = {
-				  isNormalUser = true;
-				  description = "Sasha";
-				  extraGroups = [ "networkmanager" "wheel" ];
-				  packages = with pkgs; [
-					  nvtopPackages.nvidia
-					  pciutils
-				  ];
-			  };
-			  maxim = {
-				  isNormalUser = true;
-				  description = "Maxim";
-				  packages = with pkgs; [
+	  # users = {
+		#   mutableUsers = true;
+		#   groups.nixos.members = [ "sasha" "deema" ];
+		#   users = { 
+		# 	  sasha = {
+		# 		  isNormalUser = true;
+		# 		  description = "Sasha";
+		# 		  extraGroups = [ "networkmanager" "wheel" ];
+		# 		  packages = with pkgs; [
+		# 			  nvtopPackages.nvidia
+		# 			  pciutils
+		# 		  ];
+		# 	  };
+		# 	  maxim = {
+		# 		  isNormalUser = true;
+		# 		  description = "Maxim";
+		# 		  packages = with pkgs; [
 
-				  ];
-				  extraGroups = [ "networkmanager" ];
-				  initialPassword = "maxim";
-			  };
-			  deema = {
-				  isNormalUser = true;
-				  description = "Deema";
-				  extraGroups = [ "networkmanager" "wheel" ];
-			  };
-		  };
-	  };
+		# 		  ];
+		# 		  extraGroups = [ "networkmanager" ];
+		# 		  initialPassword = "maxim";
+		# 	  };
+		# 	  deema = {
+		# 		  isNormalUser = true;
+		# 		  description = "Deema";
+		# 		  extraGroups = [ "networkmanager" "wheel" ];
+		# 	  };
+		#   };
+	  # };
 
 	  # Install firefox.
 	  programs = {
