@@ -50,7 +50,7 @@
           mprisBlacklist = [];
           preferredPlayer = "";
           visualizerType = "linear";
-          volumeOverdrive = false;
+          volumeOverdrive = true;
           volumeStep = 5;
         };
         bar = {
