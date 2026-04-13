@@ -77,7 +77,7 @@
     nix = { pkgs, ... }: {
       home.packages = with pkgs; [
         nixgl.nixGLIntel
-        nix-index
+        comma
       ];
     };
     

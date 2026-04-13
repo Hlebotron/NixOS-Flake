@@ -13,6 +13,10 @@
     wrapper-modules.url = "github:BirdeeHub/nix-wrapper-modules";
 
 
+    nix-index-db = {
+      url = "github:nix-community/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";      
+    };
     disko = {
       url = "github:nix-community/disko/latest";
       inputs.nixpkgs.follows = "nixpkgs";

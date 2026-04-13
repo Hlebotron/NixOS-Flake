@@ -12,6 +12,7 @@
       modules = [
         inputs.stylix.homeModules.stylix
         self.modules.homeManager.sasha
+        inputs.nix-index-db.homeModules.default
       ];
     };
   };
