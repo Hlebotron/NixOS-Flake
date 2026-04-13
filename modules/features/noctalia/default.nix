@@ -482,6 +482,7 @@
         wallpaper = {
           # bye bye
           directory = ../wallpaper;
+          defaultWallpaper = ../wallpaper/WinXP.jpg;
           setWallpaperOnAllMonitors = true;
           enabled = true;
         };
