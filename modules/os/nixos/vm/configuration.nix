@@ -108,6 +108,7 @@
     # hardware.pulseaudio.enable = true;
     # OR
     services = {
+
       xserver = {
         desktopManager.gnome.enable = true;
         displayManager.gdm.enable = true;
@@ -117,15 +118,15 @@
         #pulse.enable = true;
         wireplumber.enable = true;
       };
-      printing = {
-        enable = true;
-        drivers = with pkgs; [ hplip ];
-      };
+      # printing = {
+      #   enable = true;
+      #   drivers = with pkgs; [ hplip ];
+      # };
       avahi.enable = true;
-      mysql = {
-        enable = true;
-        package = pkgs.mariadb;
-      };
+      # mysql = {
+      #   enable = true;
+      #   package = pkgs.mariadb;
+      # };
     };
     xdg = {
       portal = {
@@ -139,7 +140,12 @@
         wlr.enable = true;
       };
     };
-    virtualisation.libvirtd.enable = true;
+    # virtualisation.libvirtd.enable = true;
+
+    minecraft-server = {
+      enable = true;
+      eula = true;
+    };    
     
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
     documentation.man.generateCaches = true;
