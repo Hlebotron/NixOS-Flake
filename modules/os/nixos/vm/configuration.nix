@@ -127,6 +127,11 @@
       #   enable = true;
       #   package = pkgs.mariadb;
       # };
+
+      minecraft-server = {
+        enable = true;
+        eula = true;
+      };          
     };
     xdg = {
       portal = {
@@ -142,10 +147,7 @@
     };
     # virtualisation.libvirtd.enable = true;
 
-    minecraft-server = {
-      enable = true;
-      eula = true;
-    };    
+
     
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
     documentation.man.generateCaches = true;
