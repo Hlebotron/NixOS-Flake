@@ -40,7 +40,7 @@
           position = "center";
           showCategories = true;
           sortByMostUsed = true;
-          terminalCommand = "kitty -e";
+          terminalCommand = "alacritty";
           useApp2Unit = false;
           viewMode = "list";
         };
