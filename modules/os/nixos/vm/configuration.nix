@@ -83,42 +83,17 @@
     # hardware.pulseaudio.enable = true;
     # OR
     services = {
-
-      xserver = {
-        desktopManager.gnome.enable = true;
-        displayManager.gdm.enable = true;
-      };
-      # pipewire = {
-      #   enable = true;
-      #   #pulse.enable = true;
-      #   wireplumber.enable = true;
-      # };
       qemuGuest.enable = true;
       spice-vdagentd.enable = true;
-      # printing = {
-      #   enable = true;
-      #   drivers = with pkgs; [ hplip ];
-      # };
       avahi.enable = true;
-      # mysql = {
-      #   enable = true;
-      #   package = pkgs.mariadb;
-      # };
     };
 
     # virtualisation.libvirtd.enable = true;
     
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
     documentation.man.generateCaches = true;
-    # Enable touchpad support (enabled default in most desktopManager).
     # services.libinput.enable = true;
 
-    # Define a user account. Don't forget to set a password with ‘passwd’.
-
-    # programs.firefox.enable = true;
-
-    # List packages installed in system profile. To search, run:
-    # $ nix search wget
     environment = {
       systemPackages = with pkgs; [
         neovim

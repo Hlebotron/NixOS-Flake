@@ -17,6 +17,18 @@
 
     hardware.graphics.enable = true;
 
+    services = {
+      xserver = {
+        desktopManager.gnome.enable = true;
+        displayManager.gdm.enable = true;
+      };
+      pipewire = {
+        enable = true;
+        #pulse.enable = true;
+        wireplumber.enable = true;
+      };
+    };
+
     xdg = {
       portal = {
         enable = true;
