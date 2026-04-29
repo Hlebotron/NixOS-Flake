@@ -12,7 +12,7 @@
       desktop
     ]) ++ [
       self.modules.generic.stylix
-      "${modulesPath}/installer/cd-dvd/installation-cd-minimal.nix"
+      # "${modulesPath}/installer/cd-dvd/installation-cd-minimal.nix"
     ];
 
     boot.loader.grub = {
