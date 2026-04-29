@@ -8,6 +8,8 @@
   flake.modules.nixos.vm-conf = { config, lib, pkgs, inputs, stylix, modulesPath, ... }: {
     imports = (with self.modules.nixos; [ # Include the results of the hardware scan.
       vm-hw
+      devops
+      desktop
     ]) ++ [
       "${modulesPath}/installer/cd-dvd/installation-cd-minimal.nix"
     ];
@@ -18,28 +20,10 @@
       useOSProber = true;
     };
     
-    programs = {
-      #dconf.enable = true;
-      hyprland.enable = true;
-      hyprlock.enable = true;
-      niri.enable = true;
-      
-      #ladybird.enable = false;
-      firefox.enable = true;
-      steam = {
-        enable = true;
-        # extraPackages = [
-        #   libgkt-x11
-        # ];
-      };
-      nix-ld.enable = true;
-      xwayland.enable = true;
-    };
-
     users = {
       users.sasha = {
         isNormalUser = true;
-        extraGroups = [ "wheel" "nixos" "networkmanager" "mpd" "dialout" ]; # Enable ‘sudo’ for the user.
+        extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
         initialPassword = "foobar1423";
       };
       extraGroups = { 
@@ -47,23 +31,11 @@
       };
     };
 
-    stylix = {
-      enable = true;
-      #base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-hard.yaml";
-      base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-city-dark.yaml";
-      image = ./wallpaper.png;
-      polarity = "dark";
-      cursor = {
-        name = "Bibata-Modern-Classic";
-        package = pkgs.bibata-cursors;
-        size = 20;
-      };
-      #homeManagerIntegration.followSystem = true;
-    };
-    hardware = {
-      bluetooth.enable = true;
-      graphics.enable = true;
-    };
+
+    # hardware = {
+    #   bluetooth.enable = true;
+    #   graphics.enable = true;
+    # };
     # Use the systemd-boot EFI boot loader.
     # boot.loader = {
     #   systemd-boot.enable = true;
@@ -115,11 +87,11 @@
         desktopManager.gnome.enable = true;
         displayManager.gdm.enable = true;
       };
-      pipewire = {
-        enable = true;
-        #pulse.enable = true;
-        wireplumber.enable = true;
-      };
+      # pipewire = {
+      #   enable = true;
+      #   #pulse.enable = true;
+      #   wireplumber.enable = true;
+      # };
       qemuGuest.enable = true;
       spice-vdagentd.enable = true;
       # printing = {
@@ -131,27 +103,9 @@
       #   enable = true;
       #   package = pkgs.mariadb;
       # };
+    };
 
-      minecraft-server = {
-        enable = true;
-        eula = true;
-      };          
-    };
-    xdg = {
-      portal = {
-        enable = true;
-        xdgOpenUsePortal = true;
-        extraPortals = with pkgs; [
-          xdg-desktop-portal-gnome
-          xdg-desktop-portal-gtk        
-          xdg-desktop-portal
-        ];
-        wlr.enable = true;
-      };
-    };
     # virtualisation.libvirtd.enable = true;
-
-
     
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
     documentation.man.generateCaches = true;
