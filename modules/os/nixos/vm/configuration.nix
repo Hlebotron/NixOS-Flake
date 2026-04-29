@@ -5,12 +5,13 @@
 { self, inputs, ... }:
 
 {
-  flake.modules.nixos.vm-conf = { config, lib, pkgs, inputs, stylix, modulesPath, ... }: {
+  flake.modules.nixos.vm-conf = { config, lib, pkgs, inputs, modulesPath, ... }: {
     imports = (with self.modules.nixos; [ # Include the results of the hardware scan.
       vm-hw
       devops
       desktop
     ]) ++ [
+      self.modules.generic.stylix
       "${modulesPath}/installer/cd-dvd/installation-cd-minimal.nix"
     ];
 

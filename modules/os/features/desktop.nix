@@ -4,7 +4,7 @@
   flake.modules.nixos.desktop = { config, lib, pkgs, stylix, inputs, ... }: {
     programs = {
       #dconf.enable = true;
-      hyprland.enable = true;
+      hyprland.enable = false;
       hyprlock.enable = true;
       niri.enable = true;
       
@@ -15,19 +15,6 @@
       xwayland.enable = true;
     };
 
-    stylix = {
-      enable = true;
-      #base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-hard.yaml";
-      base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-city-dark.yaml";
-      image = ./wallpaper.png;
-      polarity = "dark";
-      cursor = {
-        name = "Bibata-Modern-Classic";
-        package = pkgs.bibata-cursors;
-        size = 20;
-      };
-      #homeManagerIntegration.followSystem = true;
-    };
     hardware.graphics.enable = true;
 
     xdg = {
