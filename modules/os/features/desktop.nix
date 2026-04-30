@@ -19,7 +19,10 @@
 
     services = {
       xserver = {
-        desktopManager.gnome.enable = true;
+        desktopManager = {
+          gnome.enable = true;
+          xserver.i3.enable = true;
+        };
         displayManager.gdm.enable = true;
       };
       pipewire = {
