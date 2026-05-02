@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: searxng-deployment
+spec:
+  selector:
+    matchLabels:
+      app: searxng-pod
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: searxng-pod
+    spec:
+      containers:
+        - name: searxng-container
+          image: docker.io/searxng/searxng
+          ports:
+          - containerPort: 8080
+            name: searxng-port
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: searxng-service
+  # labels:
+  #   expose-apps: "true"
+spec:
+  selector:
+    app: searxng-pod
+  type: NodePort
+  ports:
+    - protocol: TCP
+      port: 8080 
+      targetPort: searxng-port
+      nodePort: 31112

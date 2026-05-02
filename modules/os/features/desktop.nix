@@ -18,13 +18,12 @@
     hardware.graphics.enable = true;
 
     services = {
+      # desktopManager.gnome.enable = true;
       xserver = {
-        desktopManager = {
-          gnome.enable = true;
-          xserver.i3.enable = true;
-        };
-        displayManager.gdm.enable = true;
+        enable = true;
+        desktopManager.xfce.enable = true;
       };
+      displayManager.gdm.enable = true;
       pipewire = {
         enable = true;
         #pulse.enable = true;

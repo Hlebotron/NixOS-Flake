@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mc-dep
+spec:
+  selector:
+    matchLabels:
+      app: mc-pod
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: mc-pod
+    spec:
+      containers:
+        - name: mc-container
+          image: docker.io/itzg/minecraft-server
+          ports:
+            - containerPort: 25565
+              protocol: TCP
+              name: mc-port-tcp
+            - containerPort: 25565
+              protocol: UDP
+              name: mc-port-udp
+          volumeMounts:
+            - mountPath: "/data"
+              name: mc-data-vol
+            # - mountPath: "/downloads/mods"
+            #   name: mc-mods-vol
+            # - mountPath: "/manifests/manifest.json"
+            #   
+          env:
+            - name: VERSION
+              value: "1.20.1"
+            - name: EULA
+              value: "TRUE"
+      volumes:
+        - name: mc-data-vol
+          persistentVolumeClaim:
+            claimName: mc-data-pvc
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: mc-service
+  # labels:
+  #   expose-apps: "true"
+spec:
+  selector:
+    app: mc-pod
+  type: NodePort
+  ports:
+    - protocol: TCP
+      port: 25565 
+      targetPort: mc-port-tcp
+      nodePort: 31113
+      name: mc-port-tcp
+    - protocol: UDP
+      port: 25565 
+      targetPort: mc-port-udp
+      nodePort: 31113
+      name: mc-port-udp
+
